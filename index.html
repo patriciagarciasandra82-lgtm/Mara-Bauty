@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff9fb">
+  <meta name="description" content="Mara Beauty: maquillaje y combos inteligentes para tu día a día. Belleza a tu manera, asesoría cercana y precios accesibles.">
+  <title>Mara Beauty — Tu belleza, tu estilo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #34242d;
+      --muted: #796c73;
+      --pink: #f7dce7;
+      --pink-soft: #fff5f8;
+      --berry: #bd316e;
+      --berry-dark: #962354;
+      --paper: #fffdfd;
+      --line: #f0e5e9;
+      --shadow: 0 18px 50px rgba(100, 54, 75, .09);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(1120px, calc(100% - 44px)); margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--berry);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { width: 22px; height: 1px; background: currentColor; content: ""; }
+    .section-heading { max-width: 660px; margin: 0 auto 44px; text-align: center; }
+    .section-heading .eyebrow { justify-content: center; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { line-height: 1.12; }
+    h1, h2 { font-family: "Playfair Display", Georgia, serif; }
+    h2 { margin: 14px 0; font-size: clamp(2.15rem, 4vw, 3.2rem); letter-spacing: -.035em; }
+    .section-heading p { max-width: 520px; margin: 14px auto 0; color: var(--muted); }
+
+    .top-note {
+      padding: 8px 16px;
+      color: #fff;
+      background: var(--berry-dark);
+      font-size: .78rem;
+      text-align: center;
+      letter-spacing: .025em;
+    }
+    .site-header {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      background: rgba(255, 253, 253, .91);
+      border-bottom: 1px solid transparent;
+      backdrop-filter: blur(14px);
+      transition: box-shadow .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .site-header.scrolled { border-color: var(--line); background: rgba(255, 253, 253, .97); box-shadow: 0 8px 28px rgba(72, 39, 53, .08); }
+    .nav-wrap { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: inline-flex; align-items: center; gap: 9px; white-space: nowrap; }
+    .brand-mark { font-size: 1.45rem; }
+    .brand-name { font-family: "Playfair Display", Georgia, serif; font-size: 1.35rem; font-weight: 700; letter-spacing: -.04em; }
+    .brand-name span { color: var(--berry); }
+    .nav-links { display: flex; align-items: center; gap: clamp(12px, 1.7vw, 24px); }
+    .nav-links a { color: #5e5057; font-size: .81rem; font-weight: 600; transition: color .2s ease; }
+    .nav-links a:hover { color: var(--berry); }
+    .button {
+      display: inline-flex;
+      min-height: 49px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 21px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: .87rem;
+      font-weight: 700;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      cursor: pointer;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: white; background: var(--berry); box-shadow: 0 10px 24px rgba(189, 49, 110, .2); }
+    .button-primary:hover { background: var(--berry-dark); box-shadow: 0 14px 28px rgba(189, 49, 110, .27); }
+    .button-soft { color: var(--berry-dark); background: #fff; border-color: #efcfdb; }
+    .button-soft:hover { background: var(--pink-soft); }
+    .nav-cta { min-height: 42px; padding: 0 17px; font-size: .78rem; white-space: nowrap; }
+    .menu-toggle {
+      display: none;
+      width: 43px;
+      height: 43px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+      background: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 70px 0 84px;
+      background:
+        radial-gradient(ellipse at 80% 6%, rgba(245, 209, 224, .66), transparent 33%),
+        linear-gradient(115deg, #fffafa 0%, #fff 58%, #fff5f8 100%);
+    }
+    .hero::after {
+      position: absolute;
+      right: -120px;
+      bottom: -240px;
+      width: 460px;
+      height: 460px;
+      border: 1px solid rgba(189, 49, 110, .1);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.03fr .97fr; align-items: center; gap: 60px; }
+    .hero-copy { padding: 16px 0; }
+    .hero h1 { max-width: 610px; margin: 19px 0 18px; font-size: clamp(3.2rem, 6vw, 5.5rem); letter-spacing: -.06em; }
+    .hero h1 em { color: var(--berry); font-style: normal; }
+    .hero-copy > p { max-width: 500px; margin-bottom: 27px; color: var(--muted); font-size: 1.07rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .hero-caption { display: flex; align-items: center; gap: 13px; margin-top: 26px; color: var(--muted); font-size: .83rem; }
+    .avatar-stack { display: flex; padding-left: 5px; }
+    .avatar-stack span { display: grid; width: 30px; height: 30px; margin-left: -5px; place-items: center; border: 2px solid white; border-radius: 50%; background: var(--pink); font-size: .83rem; }
+    .hero-visual { position: relative; min-height: 485px; }
+    .hero-photo { position: absolute; overflow: hidden; border: 7px solid white; border-radius: 170px 170px 28px 28px; background: #f9eff3; box-shadow: var(--shadow); }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-photo-main { top: 6px; right: 6%; width: 61%; height: 425px; transform: rotate(2deg); }
+    .hero-photo-side { right: 53%; bottom: 3px; width: 40%; height: 258px; border-radius: 100px 100px 24px 24px; transform: rotate(-5deg); }
+    .hero-sticker {
+      position: absolute;
+      z-index: 2;
+      right: 0;
+      bottom: 61px;
+      display: grid;
+      width: 116px;
+      height: 116px;
+      align-content: center;
+      border: 6px solid white;
+      border-radius: 50%;
+      color: white;
+      background: var(--berry);
+      box-shadow: 0 12px 30px rgba(120, 35, 75, .2);
+      text-align: center;
+      transform: rotate(8deg);
+    }
+    .hero-sticker strong { font-family: "Playfair Display", serif; font-size: 1.45rem; line-height: 1; }
+    .hero-sticker span { margin-top: 5px; font-size: .64rem; font-weight: 600; }
+    .floating-note { position: absolute; z-index: 3; top: 74px; left: 0; padding: 12px 16px; border-radius: 16px; background: white; box-shadow: var(--shadow); font-size: .8rem; font-weight: 700; transform: rotate(-4deg); }
+
+    .stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fff; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); padding: 22px 0; }
+    .stat { display: flex; align-items: center; justify-content: center; gap: 11px; color: var(--muted); font-size: .85rem; }
+    .stat + .stat { border-left: 1px solid var(--line); }
+    .stat strong { color: var(--ink); font-size: 1.06rem; }
+    .stat-icon { display: grid; width: 39px; height: 39px; place-items: center; border-radius: 50%; background: var(--pink-soft); font-size: 1.1rem; }
+
+    section.content-section { padding: 92px 0; }
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 72px; }
+    .about-image { position: relative; min-height: 445px; }
+    .about-image img { position: absolute; inset: 0 34px 30px 0; width: calc(100% - 34px); height: calc(100% - 30px); border-radius: 28px; object-fit: cover; box-shadow: var(--shadow); }
+    .about-tag { position: absolute; right: 0; bottom: 0; max-width: 245px; padding: 19px 20px; border-radius: 20px; background: white; box-shadow: var(--shadow); }
+    .about-tag strong { display: block; color: var(--berry); font-family: "Playfair Display", serif; font-size: 1.5rem; }
+    .about-tag span { color: var(--muted); font-size: .8rem; }
+    .about-copy h2 { max-width: 520px; }
+    .about-copy > p { color: var(--muted); }
+    .founders { display: flex; flex-wrap: wrap; gap: 9px; margin: 23px 0; }
+    .founder-pill { padding: 9px 13px; border: 1px solid var(--line); border-radius: 999px; background: white; font-size: .76rem; font-weight: 600; }
+    .solution { display: flex; gap: 14px; align-items: flex-start; margin-top: 25px; padding: 18px; border: 1px solid #f3dbe5; border-radius: 18px; background: var(--pink-soft); }
+    .solution-icon { font-size: 1.35rem; }
+    .solution strong { display: block; margin-bottom: 3px; }
+    .solution p { margin: 0; color: var(--muted); font-size: .87rem; }
+
+    .value-section { background: #fff8fa; }
+    .value-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+    .value-card { min-height: 192px; padding: 23px 18px; border: 1px solid rgba(239, 207, 219, .7); border-radius: 20px; background: rgba(255,255,255,.82); transition: transform .25s ease, box-shadow .25s ease; }
+    .value-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .value-icon { display: grid; width: 48px; height: 48px; margin-bottom: 19px; place-items: center; border-radius: 16px; background: var(--pink-soft); font-size: 1.4rem; }
+    .value-card h3 { margin-bottom: 8px; font-size: 1rem; }
+    .value-card p { margin: 0; color: var(--muted); font-size: .79rem; line-height: 1.55; }
+
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .product-card { overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: #fff; transition: transform .25s ease, box-shadow .25s ease; }
+    .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .product-image { position: relative; overflow: hidden; height: 248px; background: #f8eff2; }
+    .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .product-card:hover .product-image img { transform: scale(1.045); }
+    .product-art { display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at 75% 22%, #fff 0 8%, transparent 8.5%), linear-gradient(145deg, #fde7ef, #f8c8da 57%, #f5d9e3); }
+    .art-orbit { position: absolute; width: 190px; height: 190px; border: 1px solid rgba(189,49,110,.18); border-radius: 50%; box-shadow: 0 0 0 20px rgba(255,255,255,.16), 0 0 0 42px rgba(255,255,255,.13); }
+    .art-products { position: relative; z-index: 1; display: flex; align-items: flex-end; gap: 20px; transform: rotate(-5deg); }
+    .gloss-tube { position: relative; display: flex; width: 64px; height: 150px; align-items: flex-end; justify-content: center; padding-bottom: 12px; border: 2px solid rgba(255,255,255,.7); border-radius: 15px 15px 19px 19px; color: white; background: linear-gradient(135deg, #f7a9c5, #cb3c78 70%); box-shadow: 0 15px 30px rgba(144,48,88,.19); font-family: "Playfair Display", serif; font-size: .73rem; font-weight: 700; }
+    .gloss-tube::before { position: absolute; top: -34px; left: 15px; width: 30px; height: 38px; border-radius: 8px 8px 3px 3px; background: linear-gradient(90deg, #f4d0dd, #fff1f6 48%, #ecc2d2); content: ""; }
+    .gloss-tube::after { position: absolute; top: 0; left: 8px; width: 5px; height: 75%; border-radius: 9px; background: rgba(255,255,255,.25); content: ""; }
+    .bow-charm { display: grid; width: 92px; height: 92px; place-items: center; border: 1px solid rgba(255,255,255,.75); border-radius: 28px; color: #b52e68; background: linear-gradient(145deg, #fff, #f5d2df); box-shadow: 0 15px 30px rgba(144,48,88,.16); font-size: 3.2rem; transform: rotate(9deg); }
+    .product-label { position: absolute; top: 14px; left: 14px; padding: 6px 11px; border-radius: 999px; color: var(--berry-dark); background: rgba(255,255,255,.93); font-size: .68rem; font-weight: 700; }
+    .product-info { padding: 19px 20px 20px; }
+    .product-info h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .product-info p { min-height: 43px; margin: 0 0 14px; color: var(--muted); font-size: .81rem; }
+    .product-link { display: inline-flex; align-items: center; gap: 6px; color: var(--berry); font-size: .81rem; font-weight: 700; }
+    .product-link:hover { color: var(--berry-dark); }
+    .catalog-note { margin: 24px 0 0; color: var(--muted); font-size: .83rem; text-align: center; }
+
+    .combo { position: relative; overflow: hidden; margin-top: 62px; padding: 44px 50px; border-radius: 28px; color: white; background: linear-gradient(115deg, #a9255d, #d74a82 68%, #ec7ea4); }
+    .combo::after { position: absolute; top: -105px; right: -25px; width: 310px; height: 310px; border: 1px solid rgba(255,255,255,.22); border-radius: 50%; box-shadow: 0 0 0 30px rgba(255,255,255,.04), 0 0 0 62px rgba(255,255,255,.035); content: ""; }
+    .combo-content { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .combo .eyebrow { color: #ffe4ed; }
+    .combo h3 { max-width: 540px; margin: 11px 0; font-family: "Playfair Display", Georgia, serif; font-size: clamp(1.9rem, 4vw, 2.8rem); }
+    .combo p { max-width: 550px; margin: 0; color: rgba(255,255,255,.84); font-size: .9rem; }
+    .combo .button { flex-shrink: 0; color: var(--berry-dark); background: white; }
+
+    .trust-section { background: #fff8fa; }
+    .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .trust-card { display: flex; gap: 18px; padding: 27px; border: 1px solid var(--line); border-radius: 22px; background: white; }
+    .trust-icon { display: grid; width: 50px; height: 50px; flex: 0 0 50px; place-items: center; border-radius: 17px; background: var(--pink-soft); font-size: 1.4rem; }
+    .trust-card h3 { margin: 2px 0 9px; font-size: 1.05rem; }
+    .trust-card p { margin: 0; color: var(--muted); font-size: .83rem; }
+    .trust-card a { color: var(--berry); font-weight: 700; }
+
+    .contact-section { padding: 92px 0; }
+    .contact-panel { position: relative; overflow: hidden; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 50px; padding: 52px; border: 1px solid #f3dce6; border-radius: 30px; background: linear-gradient(130deg, #fff6f9, #fff 72%); }
+    .contact-panel::after { position: absolute; right: -120px; bottom: -220px; width: 360px; height: 360px; border: 1px solid rgba(189,49,110,.11); border-radius: 50%; box-shadow: 0 0 0 35px rgba(189,49,110,.035), 0 0 0 70px rgba(189,49,110,.025); content: ""; }
+    .contact-panel h2 { margin-bottom: 14px; }
+    .contact-panel p { max-width: 460px; margin-bottom: 23px; color: var(--muted); }
+    .contact-buttons { position: relative; z-index: 1; display: grid; gap: 12px; }
+    .social-button { display: flex; align-items: center; gap: 14px; padding: 15px 19px; border: 1px solid var(--line); border-radius: 17px; background: white; transition: transform .2s ease, box-shadow .2s ease; }
+    .social-button:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .social-icon { display: grid; width: 43px; height: 43px; flex: 0 0 43px; place-items: center; border-radius: 14px; color: white; background: #27ae70; font-size: 1.2rem; }
+    .social-button:nth-child(2) .social-icon { background: linear-gradient(140deg, #7548dc, #e33778, #ffab4a); }
+    .social-button:nth-child(3) .social-icon { background: #211b21; }
+    .social-button strong { display: block; font-size: .9rem; }
+    .social-button small { display: block; color: var(--muted); font-size: .73rem; }
+    .social-arrow { margin-left: auto; color: var(--berry); font-size: 1.2rem; }
+
+    footer { padding: 32px 0; border-top: 1px solid var(--line); background: white; }
+    .footer-wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-copy { margin: 4px 0 0; color: var(--muted); font-size: .76rem; }
+    .footer-links { display: flex; gap: 18px; color: var(--muted); font-size: .78rem; }
+    .footer-links a:hover { color: var(--berry); }
+    .whatsapp-float { position: fixed; z-index: 30; right: 22px; bottom: 22px; display: grid; width: 58px; height: 58px; place-items: center; border: 3px solid white; border-radius: 50%; color: white; background: #20b66d; box-shadow: 0 8px 25px rgba(27, 128, 79, .3); font-size: 1.55rem; transition: transform .2s ease; }
+    .whatsapp-float:hover { transform: translateY(-4px) scale(1.04); }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 1000px) {
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: .75rem; }
+      .nav-cta { padding: 0 12px; }
+      .hero-grid { gap: 32px; }
+      .value-grid { grid-template-columns: repeat(3, 1fr); }
+      .value-card { min-height: 170px; }
+    }
+    @media (max-width: 780px) {
+      .container { width: min(100% - 36px, 600px); }
+      .nav-wrap { min-height: 68px; }
+      .menu-toggle { display: inline-flex; margin-left: auto; }
+      .nav-cta { display: none; }
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 22px 17px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 253, 253, .98);
+        box-shadow: 0 15px 20px rgba(72, 39, 53, .06);
+      }
+      .nav-links.open { display: flex; flex-direction: column; }
+      .nav-links a { padding: 11px 0; border-bottom: 1px solid #f6edf0; font-size: .9rem; }
+      .hero { padding: 49px 0 58px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 18px; }
+      .hero h1 { max-width: 570px; font-size: clamp(3.1rem, 11vw, 4.7rem); }
+      .hero-visual { min-height: 440px; width: min(100%, 520px); margin: 0 auto; }
+      .hero-photo-main { right: 8%; width: 58%; height: 390px; }
+      .hero-photo-side { right: 52%; width: 39%; height: 225px; }
+      .floating-note { top: 62px; }
+      .stats-grid { gap: 8px; }
+      .stat { gap: 8px; font-size: .73rem; }
+      .stat strong { font-size: .9rem; }
+      .stat-icon { width: 33px; height: 33px; }
+      section.content-section, .contact-section { padding: 70px 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 39px; }
+      .about-image { min-height: 390px; width: min(100%, 500px); }
+      .about-copy { max-width: 600px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+      .product-image { height: 220px; }
+      .combo { padding: 35px 30px; }
+      .contact-panel { grid-template-columns: 1fr; gap: 20px; padding: 35px; }
+    }
+    @media (max-width: 520px) {
+      .top-note { font-size: .7rem; }
+      .hero h1 { font-size: 3.25rem; }
+      .hero-copy > p { font-size: .95rem; }
+      .hero-actions { align-items: stretch; flex-direction: column; }
+      .hero-actions .button { width: 100%; }
+      .hero-visual { min-height: 350px; }
+      .hero-photo-main { height: 325px; }
+      .hero-photo-side { height: 190px; }
+      .hero-sticker { right: 0; bottom: 43px; width: 95px; height: 95px; }
+      .hero-sticker strong { font-size: 1.2rem; }
+      .floating-note { top: 43px; padding: 9px 12px; font-size: .7rem; }
+      .stats-grid { grid-template-columns: 1fr; gap: 13px; padding: 18px 0; }
+      .stat { justify-content: flex-start; padding-left: 15%; font-size: .8rem; }
+      .stat + .stat { padding-top: 12px; border-top: 1px solid var(--line); border-left: 0; }
+      .value-grid { grid-template-columns: repeat(2, 1fr); gap: 11px; }
+      .value-card { min-height: 170px; padding: 18px 15px; }
+      .products-grid { grid-template-columns: 1fr; }
+      .product-image { height: 260px; }
+      .product-info p { min-height: 0; }
+      .combo { padding: 30px 24px; }
+      .combo-content { align-items: flex-start; flex-direction: column; gap: 22px; }
+      .combo .button { width: 100%; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .trust-card { padding: 22px; }
+      .contact-panel { padding: 29px 22px; }
+      .footer-wrap { align-items: flex-start; flex-direction: column; }
+      .footer-links { flex-wrap: wrap; }
+      .whatsapp-float { right: 15px; bottom: 15px; width: 54px; height: 54px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-note">Belleza cotidiana, precios que te encantan · Asesoría cercana por WhatsApp</div>
+  <header class="site-header" id="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#inicio" aria-label="Mara Beauty, ir al inicio">
+        <span class="brand-mark" aria-hidden="true">✨</span>
+        <span class="brand-name">Mara <span>Beauty</span></span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">☰</button>
+      <nav class="nav-links" id="main-nav" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#nosotras">¿Quiénes somos?</a>
+        <a href="#por-que">¿Por qué elegirnos?</a>
+        <a href="#productos">Productos</a>
+        <a href="#seguridad">Seguridad</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="button button-primary nav-cta" href="https://wa.me/?text=Hola%20Mara%20Beauty%2C%20quiero%20conocer%20sus%20productos." target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Tu beauty spot de confianza</span>
+          <h1>Tu belleza,<br>tu estilo,<br><em>tu elección.</em></h1>
+          <p>No te mostramos cientos de productos: seleccionamos los que necesitas para tu día a día.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#productos">Ver catálogo de maquillaje <span aria-hidden="true">→</span></a>
+            <a class="button button-soft" href="#combos">Comprar combos inteligentes</a>
+          </div>
+          <div class="hero-caption">
+            <div class="avatar-stack" aria-hidden="true"><span>💖</span><span>✨</span><span>🌷</span></div>
+            <span>Lo esencial para sentirte <strong>increíble</strong>, todos los días.</span>
+          </div>
+        </div>
+        <div class="hero-visual reveal" aria-label="Productos de maquillaje disponibles en Mara Beauty">
+          <div class="hero-photo hero-photo-main"><img src="b6592f81-ce26-41d4-865c-edc117925cae.jpg" alt="Correctores Bloomshell en tonos para distintos tipos de piel"></div>
+          <div class="hero-photo hero-photo-side"><img src="fcca1240-15c6-4e42-a38e-85dcaf2f545f.jpg" alt="Corrector líquido Lulia en su empaque blanco"></div>
+          <div class="floating-note">Un toque de brillo ✨</div>
+          <div class="hero-sticker"><strong>Desde<br>$7.600</strong><span>precios para ti</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats" aria-label="Ventajas de Mara Beauty">
+      <div class="container stats-grid">
+        <div class="stat"><span class="stat-icon" aria-hidden="true">💄</span><span><strong>Elegidos con cariño</strong><br>Imprescindibles de belleza</span></div>
+        <div class="stat"><span class="stat-icon" aria-hidden="true">🫶</span><span><strong>Atención personalizada</strong><br>Te ayudamos a elegir</span></div>
+        <div class="stat"><span class="stat-icon" aria-hidden="true">🎀</span><span><strong>Combos inteligentes</strong><br>Más fácil para tu rutina</span></div>
+      </div>
+    </div>
+
+    <section class="content-section" id="nosotras">
+      <div class="container about-grid">
+        <div class="about-image reveal">
+          <img src="c1d6dc26-2de2-453f-9f61-a04e5c7d09a6.jpg" alt="Variedad de pestañinas disponibles en Mara Beauty">
+          <div class="about-tag"><strong>Tu rutina, simplificada</strong><span>Lo que necesitas, sin complicarte.</span></div>
+        </div>
+        <div class="about-copy reveal">
+          <span class="eyebrow">Un poquito sobre nosotras</span>
+          <h2>Hola, somos <span style="color:var(--berry)">Mara Beauty</span></h2>
+          <p>Somos un emprendimiento creado pensando en jóvenes de 15 a 22 años que quieren expresarse con maquillaje sin perderse entre miles de opciones. Creemos que sentirte linda no debería ser complicado ni costar una fortuna.</p>
+          <div class="founders" aria-label="Fundadoras de Mara Beauty">
+            <span class="founder-pill">♡ Maria Camila Florez Rodriguez</span>
+            <span class="founder-pill">♡ Sofia Ramos Centeno</span>
+          </div>
+          <p>Por eso elegimos productos prácticos, versátiles y perfectos para acompañarte en tus clases, tus planes y tus días especiales.</p>
+          <div class="solution">
+            <span class="solution-icon" aria-hidden="true">🌸</span>
+            <div><strong>Nuestra solución: belleza sin enredos</strong><p>Precios accesibles desde $7.600 y kits inteligentes pensados para el uso diario. ¡Tú eliges lo que va contigo!</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section value-section" id="por-que">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">La diferencia Mara</span>
+          <h2>¿Por qué elegirnos?</h2>
+          <p>Queremos que encontrar tus favoritos sea fácil, divertido y muy tú.</p>
+        </div>
+        <div class="value-grid">
+          <article class="value-card reveal"><span class="value-icon" aria-hidden="true">🔎</span><h3>Escogemos por ti</h3><p>Una selección pensada para que encuentres lo esencial.</p></article>
+          <article class="value-card reveal"><span class="value-icon" aria-hidden="true">🫶</span><h3>Te entendemos</h3><p>Recomendaciones personalizadas, sin presión y con cariño.</p></article>
+          <article class="value-card reveal"><span class="value-icon" aria-hidden="true">🎁</span><h3>Combos inteligentes</h3><p>Arma tu rutina más fácil y ahorra tiempo al elegir.</p></article>
+          <article class="value-card reveal"><span class="value-icon" aria-hidden="true">💬</span><h3>Cerca de ti</h3><p>Estamos a un mensaje de distancia por WhatsApp.</p></article>
+          <article class="value-card reveal"><span class="value-icon" aria-hidden="true">✨</span><h3>Joven y en tendencia</h3><p>Productos actuales que combinan con tu propio estilo.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="productos">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Tus próximos favoritos</span>
+          <h2>Un catálogo chiquito, bien elegido.</h2>
+          <p>Descubre algunos de los productos que tenemos para ti. Escríbenos y te contamos tonos, disponibilidad y precio.</p>
+        </div>
+        <div class="products-grid">
+          <article class="product-card reveal">
+            <div class="product-image"><img src="3ca801e6-485c-43df-b087-9ec181293ff9.jpg" alt="Correctores Ani-K en empaque holográfico"><span class="product-label">Para tu día a día</span></div>
+            <div class="product-info"><h3>Corrector Ani-K</h3><p>Un imprescindible práctico para completar tu rutina diaria.</p><a class="product-link" href="https://wa.me/?text=Hola%20Mara%20Beauty%2C%20quiero%20consultar%20por%20el%20corrector%20Ani-K." target="_blank" rel="noopener noreferrer">Consultar producto <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image"><img src="b6592f81-ce26-41d4-865c-edc117925cae.jpg" alt="Correctores Bloomshell con vitamina E y ácido hialurónico"><span class="product-label">Favorito</span></div>
+            <div class="product-info"><h3>Corrector Bloomshell</h3><p>Cobertura ideal para un look fresco y natural todos los días.</p><a class="product-link" href="https://wa.me/?text=Hola%20Mara%20Beauty%2C%20quiero%20consultar%20por%20el%20corrector%20Bloomshell." target="_blank" rel="noopener noreferrer">Consultar producto <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image"><img src="c1d6dc26-2de2-453f-9f61-a04e5c7d09a6.jpg" alt="Pestañinas Vogue de diferentes colores y acabados"><span class="product-label">Mirada wow</span></div>
+            <div class="product-info"><h3>Pestañinas en tendencia</h3><p>Encuentra tu favorita: efecto pestañas infinitas, curvas y más.</p><a class="product-link" href="https://wa.me/?text=Hola%20Mara%20Beauty%2C%20quiero%20consultar%20por%20pesta%C3%B1inas%20Prosa%20Silicon." target="_blank" rel="noopener noreferrer">Pregunta por Prosa Silicon <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image"><img src="d7decb81-2af2-4b54-b486-29f5783e681f.jpg" alt="Bases líquidas Blur en varios tonos"><span class="product-label">Tono para ti</span></div>
+            <div class="product-info"><h3>Base líquida Blur</h3><p>Un acabado mate para darle a tu look ese toque especial.</p><a class="product-link" href="https://wa.me/?text=Hola%20Mara%20Beauty%2C%20quiero%20consultar%20por%20la%20base%20Blur." target="_blank" rel="noopener noreferrer">Consultar tonos <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image"><img src="fcca1240-15c6-4e42-a38e-85dcaf2f545f.jpg" alt="Correctores líquidos Lulia"><span class="product-label">El toque final</span></div>
+            <div class="product-info"><h3>Corrector líquido Lulia</h3><p>Una opción versátil para sumar a tu cosmetiquera.</p><a class="product-link" href="https://wa.me/?text=Hola%20Mara%20Beauty%2C%20quiero%20consultar%20por%20el%20corrector%20Lulia." target="_blank" rel="noopener noreferrer">Consultar producto <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image product-art" role="img" aria-label="Ilustración decorativa de un lipgloss y un accesorio en tonos rosa; consulta disponibilidad">
+              <span class="art-orbit" aria-hidden="true"></span>
+              <div class="art-products" aria-hidden="true"><span class="gloss-tube">Bloom<br>Kiss</span><span class="bow-charm">🎀</span></div>
+              <span class="product-label">Ilustración referencial</span>
+            </div>
+            <div class="product-info"><h3>Lipgloss Bloom Kiss &amp; Bloom Bow</h3><p>Pregunta por el brillo Bloom Kiss y el llavero Bloom Bow, dos detalles para llevar contigo.</p><a class="product-link" href="https://wa.me/?text=Hola%20Mara%20Beauty%2C%20%C2%BFtienen%20disponibles%20Bloom%20Kiss%20y%20Bloom%20Bow%3F" target="_blank" rel="noopener noreferrer">Consultar disponibilidad <span aria-hidden="true">→</span></a></div>
+          </article>
+        </div>
+        <p class="catalog-note">¿Buscas algo en particular? También puedes preguntarnos por el Lipgloss Bloom Kiss, la Pestañina Prosa Silicon y el Llavero Bloom Bow. La disponibilidad puede variar.</p>
+        <div class="combo reveal" id="combos">
+          <div class="combo-content">
+            <div><span class="eyebrow">Menos vueltas, más glow</span><h3>Combos especiales para tu rutina real.</h3><p>Arma un kit con tus esenciales y ahorra tiempo eligiendo. Cuéntanos qué necesitas y te ayudamos a encontrar una combinación para ti.</p></div>
+            <a class="button" href="https://wa.me/?text=Hola%20Mara%20Beauty%2C%20quiero%20armar%20un%20combo%20de%20maquillaje." target="_blank" rel="noopener noreferrer">Quiero mi combo <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section trust-section" id="seguridad">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Compra con tranquilidad</span>
+          <h2>Tu confianza también es parte de la rutina.</h2>
+          <p>Queremos que sepas qué compras y cómo cuidamos la información que compartes con nosotras.</p>
+        </div>
+        <div class="trust-grid">
+          <article class="trust-card reveal">
+            <span class="trust-icon" aria-hidden="true">🧴</span>
+            <div><h3>Calidad y procedencia</h3><p>Comercializamos productos cosméticos y priorizamos aquellos que cumplen con las normas sanitarias obligatorias aplicables en Colombia, incluida la Notificación Sanitaria Obligatoria (NSO) cuando corresponde. Si tienes dudas sobre un producto, consúltanos antes de comprar.</p></div>
+          </article>
+          <article class="trust-card reveal">
+            <span class="trust-icon" aria-hidden="true">🔒</span>
+            <div><h3>Protección de tus datos</h3><p>Tratamos tus datos personales con responsabilidad, de acuerdo con la Ley 1581 de 2012 y sus normas reglamentarias. Solo los usamos para atender tus consultas y gestionar tu compra; puedes pedir información o solicitar su actualización.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contacto">
+      <div class="container">
+        <div class="contact-panel reveal">
+          <div>
+            <span class="eyebrow">Hablemos de belleza</span>
+            <h2>¿Tienes dudas sobre qué tono elegir?</h2>
+            <p>Escríbenos y recibe asesoría personalizada. Queremos ayudarte a encontrar ese producto que se siente hecho para ti. 💗</p>
+            <a class="button button-primary" href="https://wa.me/?text=Hola%20Mara%20Beauty%2C%20%C2%BFme%20ayudan%20a%20elegir%20un%20tono%3F" target="_blank" rel="noopener noreferrer">Conversemos por WhatsApp <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="contact-buttons">
+            <a class="social-button" href="https://wa.me/?text=Hola%20Mara%20Beauty%2C%20quiero%20asesor%C3%ADa." target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true">◉</span><span><strong>WhatsApp Business</strong><small>Asesoría directa y personalizada</small></span><span class="social-arrow" aria-hidden="true">↗</span></a>
+            <a class="social-button" href="https://www.instagram.com/mara.beauty_col/" target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true">◎</span><span><strong>Instagram</strong><small>Síguenos para ver novedades</small></span><span class="social-arrow" aria-hidden="true">↗</span></a>
+            <a class="social-button" href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer"><span class="social-icon" aria-hidden="true">♪</span><span><strong>TikTok</strong><small>Ideas, tendencias y mucho glow</small></span><span class="social-arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div>
+        <a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true">✨</span><span class="brand-name">Mara <span>Beauty</span></span></a>
+        <p class="footer-copy">© <span id="year"></span> Mara Beauty. Todos los derechos reservados.</p>
+      </div>
+      <div class="footer-links"><a href="#nosotras">Nuestra historia</a><a href="#productos">Catálogo</a><a href="#seguridad">Privacidad y seguridad</a></div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/?text=Hola%20Mara%20Beauty%2C%20quiero%20conocer%20sus%20productos." target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">◉</a>
+
+  <script>
+    const header = document.getElementById("site-header");
+    const menuToggle = document.getElementById("menu-toggle");
+    const mainNav = document.getElementById("main-nav");
+
+    function updateHeader() {
+      header.classList.toggle("scrolled", window.scrollY > 12);
+    }
+
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+      menuToggle.textContent = isOpen ? "×" : "☰";
+    });
+
+    mainNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mainNav.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menú");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+  </script>
+</body>
+</html>
